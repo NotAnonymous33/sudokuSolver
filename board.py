@@ -16,7 +16,7 @@ class Board:
 
         self.changeable = [[cell == 0 for cell in row] for row in self.rows]
         self.clock = pygame.time.Clock()
-        self.fps = 20
+        self.fps = 10000000
         self.gui = GUI()
 
     def show_board(self):
@@ -43,11 +43,18 @@ class Board:
                 if self.complete():
                     print(self.count)
                     self.show_board()
+                    self.write_board()
+                    self.gui.show_end(self.rows, self.changeable)
                     break
                 self.find_next_changeable()
             self.gui.check_events()
             self.gui.show(self.rows, self.current_col, self.current_row, self.changeable)
             self.clock.tick(self.fps)
+
+    def write_board(self):
+        with open("completed_board.txt", "w") as file:
+            for i in self.rows:
+                file.writelines(" ".join(list(map(str, i))))
 
     def find_next_changeable(self):
         self.set_next_coord()

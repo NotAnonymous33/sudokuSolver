@@ -24,6 +24,19 @@ class GUI:
                 self.window.blit(text, [(self.length + self.border) * col_num + self.length//2, (self.length + self.border) * row_num + self.length//2])
         pygame.display.update()
 
+    def show_end(self, grid, changeable_grid):
+        for row_num in range(len(grid)):
+            for col_num in range(len(grid[row_num])):
+                if not changeable_grid[row_num][col_num]:
+                    color = (100, 255, 100)
+        pygame.display.update()
+        finished = False
+        while not finished:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+                    finished = True
+        pygame.quit()
+
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
