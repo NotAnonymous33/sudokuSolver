@@ -1,3 +1,6 @@
 # Pycharm file
 .idea
 venv
+
+# Program output
+completed_board.txt
