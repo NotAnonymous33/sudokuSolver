@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 class Board:
-    def __init__(self):
+    def __init__(self, fps):
         self.current_row = 0
         self.current_col = -1
         self.rows = []
@@ -16,7 +16,7 @@ class Board:
 
         self.changeable = [[cell == 0 for cell in row] for row in self.rows]
         self.clock = pygame.time.Clock()
-        self.fps = 10000000
+        self.fps = fps
         self.gui = GUI()
 
     def show_board(self):
@@ -54,7 +54,7 @@ class Board:
     def write_board(self):
         with open("completed_board.txt", "w") as file:
             for i in self.rows:
-                file.writelines(" ".join(list(map(str, i))))
+                file.writelines(" ".join(list(map(str, i))) + "\n")
 
     def find_next_changeable(self):
         self.set_next_coord()
